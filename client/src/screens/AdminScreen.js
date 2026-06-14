@@ -16,7 +16,7 @@ export default function AdminScreen({ onBackToShop }) {
   // Fetch live active stock list for dropdown selection mapping
   const loadStockList = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/products');
+      const res = await fetch('https://jadounhub-server.onrender.com/api/products');
       const data = await res.json();
       if (data.success) {
         setAllProducts(data.products);
@@ -52,7 +52,7 @@ export default function AdminScreen({ onBackToShop }) {
   const handleLiveRateUpdateSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/products/update', {
+      const response = await fetch('https://jadounhub-server.onrender.com/api/products/update', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: selectedProductId, ...updateFields })
@@ -68,7 +68,7 @@ export default function AdminScreen({ onBackToShop }) {
   const handleAddNewProductSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/products/add', {
+      const response = await fetch('https://jadounhub-server.onrender.com/api/products/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

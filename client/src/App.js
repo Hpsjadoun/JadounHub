@@ -25,7 +25,9 @@ export default function App() {
 
   const fetchInventory = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/products');
+      // const res = await fetch('https://jadounhub-server.onrender.com/api/products');
+      // const res = await fetch(`${process.env.REACT_APP_API_URL || 'https://jadounhub-server.onrender.com'}/api/products`);
+      const res = await fetch(`${process.env.REACT_APP_API_URL || 'https://jadounhub-server.onrender.com'}/api/products`);
       const data = await res.json();
       if (data.success) {
         setDbProducts(data.products);

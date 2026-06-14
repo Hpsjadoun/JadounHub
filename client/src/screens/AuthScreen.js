@@ -20,7 +20,7 @@ export default function AuthScreen({ onAuthSuccess }) {
       }
 
       try {
-        const response = await fetch('http://localhost:5000/api/auth/signup', {
+        const response = await fetch('https://jadounhub-server.onrender.com/api/auth/signup', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -43,7 +43,7 @@ export default function AuthScreen({ onAuthSuccess }) {
     } else {
       // 2. DIRECT ABSOLUTE SERVER SIGN IN
       try {
-        const response = await fetch('http://localhost:5000/api/auth/signin', {
+        const response = await fetch('https://jadounhub-server.onrender.com/api/auth/signin', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
