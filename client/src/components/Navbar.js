@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function Navbar({ user, cartCount, isAdmin, onAuthClick, onAdminPortalClick, onBrandClick, onOrdersClick, onLogout, darkMode, onToggleDark }) {
+export default function Navbar({ user, cartCount, wishlistCount = 0, isAdmin, onAuthClick, onAdminPortalClick, onBrandClick, onOrdersClick, onLogout, darkMode, onToggleDark }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
@@ -44,6 +44,16 @@ export default function Navbar({ user, cartCount, isAdmin, onAuthClick, onAdminP
               🛡️ Admin Mode Active
             </span>
           )}
+
+          {/* Wishlist Icon */}
+          <div className={`relative cursor-pointer p-1 transition ${darkMode ? 'text-gray-300 hover:text-pink-400' : 'text-gray-600 hover:text-pink-500'}`} title="My Wishlist">
+            <i className="fa-regular fa-heart text-xl"></i>
+            {wishlistCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-pink-500 text-white text-[10px] font-black w-4 h-4 rounded-full flex items-center justify-center shadow-sm">
+                {wishlistCount}
+              </span>
+            )}
+          </div>
 
           {/* Cart Icon Badge */}
           <div onClick={() => setIsDropdownOpen(false)} className={`relative cursor-pointer p-1 transition ${darkMode ? 'text-gray-300 hover:text-indigo-400' : 'text-gray-600 hover:text-indigo-600'}`}>

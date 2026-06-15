@@ -17,7 +17,16 @@ export default function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [cart, setCart] = useState([]);
   const [checkoutItem, setCheckoutItem] = useState(null);
+  const [wishlist, setWishlist] = useState(() => JSON.parse(localStorage.getItem('wishlist') || '[]'));
   const [darkMode, setDarkMode] = useState(() => localStorage.getItem('darkMode') === 'true');
+
+  const toggleWishlist = (productId) => {
+    setWishlist(prev => {
+      const updated = prev.includes(productId) ? prev.filter(id => id !== productId) : [...prev, productId];
+      localStorage.setItem('wishlist', JSON.stringify(updated));
+      return updated;
+    });
+  };
 
   const ADMIN_CREDENTIALS = {
     email: 'admin@jadounhub.com',
@@ -78,6 +87,7 @@ export default function App() {
       <Navbar 
         user={currentUser} 
         cartCount={cart.length}
+        wishlistCount={wishlist.length}
         isAdmin={isAdminLoggedIn} 
         onAuthClick={() => setCurrentScreen('auth')}
         onAdminPortalClick={handleAdminLoginAttempt}
@@ -98,8 +108,10 @@ export default function App() {
       <main className="flex-grow">
         {currentScreen === 'shop' && (
           <HomeScreen 
-            dbProducts={dbProducts} 
+            dbProducts={dbProducts}
             darkMode={darkMode}
+            wishlist={wishlist}
+            onToggleWishlist={toggleWishlist}
             onProductClick={(prod) => { setSelectedProduct(prod); setCurrentScreen('detail'); }}
             onAddToCart={(prod) => {
               if(!currentUser) { alert("👋 Please Sign In / Register first!"); setCurrentScreen('auth'); return; }
