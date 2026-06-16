@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function Navbar({ user, cartCount, wishlistCount = 0, isAdmin, onAuthClick, onAdminPortalClick, onBrandClick, onOrdersClick, onLogout, darkMode, onToggleDark }) {
+export default function Navbar({ user, cartCount, wishlistCount = 0, isAdmin, onAuthClick, onAdminPortalClick, onBrandClick, onCartClick, onOrdersClick, onLogout, darkMode, onToggleDark }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
@@ -56,7 +56,7 @@ export default function Navbar({ user, cartCount, wishlistCount = 0, isAdmin, on
           </div>
 
           {/* Cart Icon Badge */}
-          <div onClick={() => setIsDropdownOpen(false)} className={`relative cursor-pointer p-1 transition ${darkMode ? 'text-gray-300 hover:text-indigo-400' : 'text-gray-600 hover:text-indigo-600'}`}>
+          <div onClick={() => { setIsDropdownOpen(false); onCartClick && onCartClick(); }} className={`relative cursor-pointer p-1 transition ${darkMode ? 'text-gray-300 hover:text-indigo-400' : 'text-gray-600 hover:text-indigo-600'}`}>
             <i className="fa-solid fa-bag-shopping text-xl"></i>
             {cartCount > 0 && (
               <span className="absolute -top-1 -right-1 bg-indigo-600 text-white text-[10px] font-black w-4 h-4 rounded-full flex items-center justify-center shadow-sm">
