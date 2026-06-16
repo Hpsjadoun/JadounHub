@@ -87,7 +87,7 @@ export default function PaymentScreen({ item, cart, onPaymentSuccess, darkMode }
               <div className="flex justify-center">
                 <div className="bg-white p-3 rounded-2xl shadow-md border border-orange-200 inline-block">
                   <img
-                    src="/qr-payment.jpeg"
+                    src="https://i.ibb.co/SXBKpwRG/Whats-App-Image-2026-06-15-at-2-31-16-PM.jpg"
                     alt="UPI QR Code - HIMANSHU PRATAP SINGH"
                     className="w-48 h-48 object-contain rounded-xl"
                     onError={(e) => {
