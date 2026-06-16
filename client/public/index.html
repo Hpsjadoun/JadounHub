@@ -3,43 +3,126 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+    <!-- PWA Theme -->
+    <meta name="theme-color" content="#4f46e5" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="JadounHub" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- SEO -->
+    <meta name="description" content="JadounHub - India's Premium Marketplace. Shop Electronics, Fashion, Shoes, Home Decor & More. Fast delivery, Secure UPI payments, Best prices!" />
+    <meta name="keywords" content="JadounHub, online shopping, electronics, fashion, shoes, India marketplace" />
+    <meta name="author" content="JadounHub" />
+
+    <!-- Open Graph (WhatsApp/Social share preview) -->
+    <meta property="og:title" content="JadounHub - India's Marketplace" />
+    <meta property="og:description" content="Shop Electronics, Fashion, Shoes & More at best prices!" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://jadounhub.pages.dev" />
+
+    <!-- Apple Icons -->
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+
+    <!-- Manifest -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <title>JadounHub - India's Marketplace</title>
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+      * { font-family: 'Inter', sans-serif; }
+      body { margin: 0; -webkit-tap-highlight-color: transparent; }
+      /* Smooth scrolling */
+      html { scroll-behavior: smooth; }
+      /* Hide scrollbar */
+      .scrollbar-none::-webkit-scrollbar { display: none; }
+      .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+      /* PWA install prompt animation */
+      @keyframes slideUp {
+        from { transform: translateY(100%); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+      .animate-slideUp { animation: slideUp 0.3s ease-out; }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fadeIn { animation: fadeIn 0.3s ease-out; }
+      @keyframes slideIn {
+        from { transform: translateX(100%); }
+        to { transform: translateX(0); }
+      }
+      .animate-slideIn { animation: slideIn 0.3s ease-out; }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    <!-- PWA Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js')
+            .then(function(reg) { console.log('JadounHub SW registered!', reg.scope); })
+            .catch(function(err) { console.log('SW registration failed:', err); });
+        });
+      }
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+      // PWA Install Prompt
+      let deferredPrompt;
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        // Show install banner after 3 seconds
+        setTimeout(() => {
+          const banner = document.getElementById('pwa-install-banner');
+          if (banner) banner.style.display = 'flex';
+        }, 3000);
+      });
+
+      function installPWA() {
+        const banner = document.getElementById('pwa-install-banner');
+        if (banner) banner.style.display = 'none';
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then((result) => {
+            console.log('PWA install:', result.outcome);
+            deferredPrompt = null;
+          });
+        }
+      }
+
+      function dismissPWA() {
+        const banner = document.getElementById('pwa-install-banner');
+        if (banner) banner.style.display = 'none';
+      }
+    </script>
+
+    <!-- PWA Install Banner -->
+    <div id="pwa-install-banner" style="display:none; position:fixed; bottom:80px; left:16px; right:16px; z-index:9999; background:white; border:1px solid #e0e7ff; border-radius:20px; padding:14px 16px; box-shadow:0 8px 32px rgba(79,70,229,0.15); align-items:center; gap:12px; animation: slideUp 0.3s ease-out;">
+      <div style="width:40px; height:40px; background:#4f46e5; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+        <span style="color:white; font-size:20px;">🛍️</span>
+      </div>
+      <div style="flex:1;">
+        <p style="margin:0; font-weight:800; font-size:13px; color:#1f2937;">Install JadounHub App</p>
+        <p style="margin:0; font-size:11px; color:#6b7280;">Shop faster with our app!</p>
+      </div>
+      <button onclick="installPWA()" style="background:#4f46e5; color:white; border:none; border-radius:10px; padding:8px 14px; font-size:11px; font-weight:800; cursor:pointer; white-space:nowrap;">Install</button>
+      <button onclick="dismissPWA()" style="background:#f3f4f6; color:#6b7280; border:none; border-radius:10px; padding:8px 10px; font-size:11px; font-weight:700; cursor:pointer;">✕</button>
+    </div>
   </body>
 </html>
