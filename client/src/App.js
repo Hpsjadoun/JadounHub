@@ -98,7 +98,7 @@ export default function App() {
         {currentScreen === 'checkout' && <CheckoutScreen darkMode={dm} t={t} item={checkoutItem} onProceedToPayment={() => setCurrentScreen('payment')} />}
         {currentScreen === 'payment' && <PaymentScreen darkMode={dm} t={t} item={checkoutItem} cart={cart} onPaymentSuccess={() => { setCart([]); setCheckoutItem(null); setCurrentScreen('success'); }} />}
         {currentScreen === 'orders' && <OrdersDashboard darkMode={dm} t={t} onBackToShop={() => setCurrentScreen('shop')} />}
-          {currentScreen === 'orders' && <ReferralWidget darkMode={dm} user={currentUser} />}
+        {currentScreen === 'orders' && <ReferralWidget darkMode={dm} user={currentUser} />}
         {currentScreen === 'success' && <SuccessScreen darkMode={dm} onReturnHome={() => setCurrentScreen('shop')} />}
       </main>
 
