@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import AdminAnalytics from '../components/AdminAnalytics';
 
 export default function AdminScreen({ onBackToShop }) {
   const [allProducts, setAllProducts] = useState([]);
@@ -92,7 +93,9 @@ export default function AdminScreen({ onBackToShop }) {
 
   return (
     <div className="max-w-4xl mx-auto my-8 p-6 bg-white border rounded-3xl shadow-sm space-y-10 animate-fadeIn">
-      
+
+      <AdminAnalytics darkMode={false} products={allProducts} />
+
       {/* HEADER BAR */}
       <div className="flex items-center justify-between border-b pb-4">
         <div className="flex items-center gap-2">
