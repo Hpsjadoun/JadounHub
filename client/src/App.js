@@ -9,7 +9,7 @@ import PaymentScreen from './screens/PaymentScreen';
 import SuccessScreen from './screens/SuccessScreen';
 import OrdersDashboard from './screens/OrdersDashboard';
 import translations from './i18n';
-// import ChatWidget from './components/ChatWidget';
+import ChatWidget from './components/ChatWidget';
 import ReferralWidget from './components/ReferralWidget';
 // import AdminAnalytics from '../components/AdminAnalytics';
 
@@ -146,7 +146,7 @@ export default function App() {
           </div>
         </div>
       )}
-
+      <ChatWidget darkMode={dm} />
       {/* WhatsApp */}
       <a href="https://wa.me/919389720893?text=Hi! I'm interested in ordering from JadounHub 🛍️" target="_blank" rel="noopener noreferrer" className="fixed bottom-6 right-6 z-40 bg-green-500 hover:bg-green-600 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
