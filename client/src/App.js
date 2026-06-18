@@ -9,7 +9,7 @@ import PaymentScreen from './screens/PaymentScreen';
 import SuccessScreen from './screens/SuccessScreen';
 import OrdersDashboard from './screens/OrdersDashboard';
 import translations from './i18n';
-import ChatWidget from './components/ChatWidget';
+// import ChatWidget from './components/ChatWidget';
 import ReferralWidget from './components/ReferralWidget';
 // import AdminAnalytics from '../components/AdminAnalytics';
 
