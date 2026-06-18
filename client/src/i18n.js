@@ -170,5 +170,4 @@ const translations = {
     startShopping: 'खरीदारी शुरू करें',
   }
 };
-
 export default translations;
