@@ -11,7 +11,7 @@ import OrdersDashboard from './screens/OrdersDashboard';
 import translations from './i18n';
 import ChatWidget from './components/ChatWidget';
 import ReferralWidget from './components/ReferralWidget';
-// import AdminAnalytics from '../components/AdminAnalytics';
+import AdminAnalytics from '../components/AdminAnalytics';
 
 export default function App() {
   const [currentUser, setCurrentUser] = useState(null);
