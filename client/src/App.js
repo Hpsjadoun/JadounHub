@@ -9,6 +9,8 @@ import PaymentScreen from './screens/PaymentScreen';
 import SuccessScreen from './screens/SuccessScreen';
 import OrdersDashboard from './screens/OrdersDashboard';
 import translations from './i18n';
+import ChatWidget from './components/ChatWidget';
+import ReferralWidget from './components/ReferralWidget';
 
 export default function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -96,6 +98,7 @@ export default function App() {
         {currentScreen === 'checkout' && <CheckoutScreen darkMode={dm} t={t} item={checkoutItem} onProceedToPayment={() => setCurrentScreen('payment')} />}
         {currentScreen === 'payment' && <PaymentScreen darkMode={dm} t={t} item={checkoutItem} cart={cart} onPaymentSuccess={() => { setCart([]); setCheckoutItem(null); setCurrentScreen('success'); }} />}
         {currentScreen === 'orders' && <OrdersDashboard darkMode={dm} t={t} onBackToShop={() => setCurrentScreen('shop')} />}
+          {currentScreen === 'orders' && <ReferralWidget darkMode={dm} user={currentUser} />}
         {currentScreen === 'success' && <SuccessScreen darkMode={dm} onReturnHome={() => setCurrentScreen('shop')} />}
       </main>
 
